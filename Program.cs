@@ -6,10 +6,30 @@ int firstNum = askNum();
 char character = askSign();
 int secondNum = askNum();  
 
+static void doOperation(int num1, int num2, char op)
+{
+    switch(op)
+    {
+        case '+':
+            Console.WriteLine(num1+num2);
+            break;
+        case '/':
+            Console.WriteLine(num1/num2);
+            break;
+        case '-':
+            Console.WriteLine(num1-num2); 
+            break;
+        case '*':
+            Console.WriteLine(num1*num2);
+            break;
+    }
+}
 
+
+// ASK SIGN 
 static char askSign()
 {
-    Console.WriteLine("Please pick from '*' or '/' :\n"); 
+    Console.WriteLine("Pick an operator:\n"); 
     char sign = '+';
     try
     {
@@ -28,7 +48,7 @@ static char askSign()
 
 
 
-
+// ASK NUM
 static int askNum()
 {
     Console.WriteLine("Pick any number:\n");
