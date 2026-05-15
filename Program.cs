@@ -1,49 +1,59 @@
 ﻿using System.Globalization;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
 
-Console.WriteLine("Welcome to Eddy's Calculator"); 
+Console.WriteLine("\nWelcome to Eddy's Calculator"); 
 int firstNum = askNum(); 
-char character = askSign();
+char character = askOp();
 int secondNum = askNum();  
+doOperation(firstNum,secondNum,character);
 
 static void doOperation(int num1, int num2, char op)
 {
+    int ans; 
     switch(op)
     {
         case '+':
-            Console.WriteLine(num1+num2);
+            ans = num1+num2;
+            Console.WriteLine($"{num1} {op} {num2} = {ans}");
             break;
         case '/':
-            Console.WriteLine(num1/num2);
+            ans = num1/num2;
+            Console.WriteLine($"{num1} {op} {num2} = {ans}"); 
             break;
         case '-':
-            Console.WriteLine(num1-num2); 
+            ans = num1-num2;
+            Console.WriteLine($"{num1} {op} {num2} = {ans}");
             break;
         case '*':
-            Console.WriteLine(num1*num2);
+            ans = num1*num2;
+            Console.WriteLine($"{num1} {op} {num2} = {ans}");
             break;
     }
 }
 
 
 // ASK SIGN 
-static char askSign()
+static char askOp()
 {
-    Console.WriteLine("Pick an operator:\n"); 
-    char sign = '+';
-    try
+    char op = ' '; 
+    while (op != '+' && op != '-' && op != '*' && op != '/')
     {
-        sign = char.Parse(Console.ReadLine()); 
+        Console.WriteLine("Pick an operator (+, -, *, /):");
+        try
+        {
+            op = char.Parse(Console.ReadLine());
+        }
+        catch(ArgumentNullException)
+        {
+            Console.WriteLine("Input cannot be null"); 
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Input has to be char"); 
+        }
     }
-    catch(ArgumentNullException)
-    {
-        Console.WriteLine("Input cannot be null"); 
-    }
-    catch (FormatException)
-    {
-        Console.WriteLine("Input has to be char"); 
-    }
-    return sign;
+    return op;
 }
 
 
@@ -51,7 +61,7 @@ static char askSign()
 // ASK NUM
 static int askNum()
 {
-    Console.WriteLine("Pick any number:\n");
+    Console.WriteLine("Pick any number:");
     int number = 0;   
     // Asking for user input  
     try
